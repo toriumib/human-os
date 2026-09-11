@@ -1,0 +1,13 @@
+# Android build artifacts
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/app/src/main/assets/web/
+*.iml
+.idea/
+.cxx/
+
+# OS / editor
+.DS_Store
+Thumbs.db

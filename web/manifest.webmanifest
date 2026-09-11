@@ -1,0 +1,16 @@
+{
+  "name": "HUMAN OS — AIに負けない訓練所",
+  "short_name": "HUMAN OS",
+  "description": "第一原理思考・物理世界ハック・AI制御。AIに負けないための3つの訓練。",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0c11",
+  "theme_color": "#0a0c11",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

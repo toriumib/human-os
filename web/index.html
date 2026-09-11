@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0c11">
+<meta name="description" content="HUMAN OS — AIに負けないための3つの訓練。第一原理思考・物理世界ハック・AI制御シミュレーション。">
+<title>HUMAN OS — AIに負けない訓練所</title>
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button id="btnHome" class="brand" aria-label="ホーム">HUMAN<span class="brand-accent">OS</span></button>
+    <div class="tagline">AIに負けないための訓練所</div>
+  </div>
+</header>
+
+<main id="view" class="view"><!-- rendered by js --></main>
+
+<footer class="foot">
+  <p>Born from a thought experiment — 第一原理でつくられた訓練所。</p>
+  <p class="foot-sub">FIRST PRINCIPLES · SENSORIUM · SYNTHESIS — © 2026 toriumib</p>
+</footer>
+
+<nav class="tabbar" id="tabbar" aria-label="モジュール選択">
+  <button data-nav="home" class="active">道場</button>
+  <button data-nav="fp">第一原理</button>
+  <button data-nav="sensorium">Sensorium</button>
+  <button data-nav="synthesis">Synthesis</button>
+</nav>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/fp.js"></script>
+<script src="js/sensorium.js"></script>
+<script src="js/synthesis.js"></script>
+</body>
+</html>
