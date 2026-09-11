@@ -1,0 +1,11 @@
+// HUMAN OS — Cloudflare Worker (静的アセット配信)
+// デプロイ: cd cloudflare && npx wrangler deploy
+// カスタムドメイン: human-os.toriumis.com（Workers Custom Domain がDNSと証明書を自動管理）
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "human-os",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "../web"
+  }
+}

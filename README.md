@@ -4,7 +4,8 @@
 
 HUMAN OS は、イーロン・マスク的な思考特性（第一原理思考・物理世界との摩擦・AIへの警戒と活用）を鍛えるための3モジュール構成の訓練アプリです。Webアプリ（PWA）とAndroidアプリの両形態で提供されます。
 
-- 🌐 **Webアプリ**: https://toriumib.github.io/human-os/
+- 🌐 **本番URL**: https://human-os.toriumis.com/ （Cloudflare Workers + カスタムドメイン）
+- 🌐 **ミラー（GitHub Pages）**: https://toriumib.github.io/human-os/
 - 📦 **Android APK**: [Releases](https://github.com/toriumib/human-os/releases) （CIが自動ビルド）
 - 📱 **Androidソース**: [`android/`](android/)
 
@@ -37,6 +38,8 @@ human-os/
 ├── android/              # Androidアプリ（WebViewシェル, Java, minSdk 26）
 │   └── app/
 │       └── src/main/     # MainActivity + アダプティブアイコン
+├── cloudflare/           # 本番配信（Cloudflare Workers 静的アセット）
+│   └── wrangler.jsonc    # カスタムドメイン: human-os.toriumis.com
 └── .github/workflows/
     ├── deploy-web.yml    # web/ を GitHub Pages へ自動デプロイ
     └── android-build.yml # web/ をアセットに同梱し APK をビルド → Release
@@ -73,7 +76,13 @@ cd android && gradle assembleDebug
 
 ## 公開について
 
-- **Web**: GitHub Pages より自動デプロイ（main ブランチ push を検知）
+- **本番（toriumis.com）**: Cloudflare Workers が静的アセットを配信。カスタムドメイン `human-os.toriumis.com` はWorkers Custom Domainとして紐付け済みで、DNSレコードとSSL証明書はCloudflareが自動管理（apexのスタジオトリウミ本番サイトには影響なし）。更新コマンド:
+
+  ```bash
+  cd cloudflare && npx wrangler deploy   # web/ を再配信
+  ```
+
+- **ミラー**: GitHub Pages が main ブランチ push を検知して自動デプロイ
 - **Android**: `v*` タグの push で GitHub Actions が APK をビルドし、GitHub Releases に公開。APKを端末で直接インストール（サイドロード）できます
 - **Google Play ストアでの配布**を行う場合: [Google Play Console](https://play.google.com/console)（登録料 $25）でアプリを作成し、`android/` をリリースビルド（署名付きAAB）にしてアップロードしてください。必要な手順はPlay Consoleがガイドします
 
