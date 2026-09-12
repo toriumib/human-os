@@ -11,3 +11,6 @@ android/app/src/main/assets/web/
 # OS / editor
 .DS_Store
 Thumbs.db
+
+# wrangler local state
+.wrangler/
