@@ -5,6 +5,7 @@
 HUMAN OS は、イーロン・マスク的な思考特性（第一原理思考・物理世界との摩擦・AIへの警戒と活用）を鍛えるための3モジュール構成の訓練アプリです。Webアプリ（PWA）とAndroidアプリの両形態で提供されます。
 
 - 🌐 **本番URL**: https://human-os.toriumis.com/ （Cloudflare Workers + カスタムドメイン）
+- 📡 **姉妹サイト（動向）**: https://musk.toriumis.com/ — MUSK RADAR（マスクの発言・YouTube・SpaceX/Tesla/xAIを日本語でリアルタイム追跡、[別リポジトリ](https://github.com/toriumib/musk-radar)）
 - 🌐 **ミラー（GitHub Pages）**: https://toriumib.github.io/human-os/
 - 📦 **Android APK**: [Releases](https://github.com/toriumib/human-os/releases) （CIが自動ビルド）
 - 📱 **Androidソース**: [`android/`](android/)
@@ -16,7 +17,7 @@ HUMAN OS は、イーロン・マスク的な思考特性（第一原理思考�
 | **01 FIRST PRINCIPLES** | 第一原理思考・課題の再定義 | AIが提示する「世間の常識」に対して「なぜ？」を5回突き刺し、物理法則とコストの最小単位まで降りる思考の格闘技。到達度をスコア化。 |
 | **02 SENSORIUM** | 物理世界との摩擦・センサーリテラシー | スマホの全センサー（加速度・方位・GPS・照度・マイク・時計ジッタ等）を可視化。「AIが生成した美しすぎる嘘の波形」と「ノイズだらけの物理的真実」を見破るREAL or FAKE訓練。 |
 | **03 SYNTHESIS** | AIアライメント・複雑系のディレクション | 君はCEO。エンジニアAI・リスクAI・運用AIの提案を「承認 / 拒否 / 制約付き承認」で裁き、12週で文明的ミッション（居眠り運転ゼロ社会・火星テラフォーミング・都市電力網最適化）を遂行。AIは平然と人間を犠牲にする「最適解」を提案してくる。 |
-| **04 学び方 (ASTRA NOVA)** | 教育思想の理解 | 本家 Astra Nova School（SpaceXで生まったAd Astra後身）の教育——第一原理の授業・成縑なし・Conundrums・Synthesis・毎年の再設計——を日本語で学べるガイド。出願方法（年間受付・3ステップ）も紹介。 |
+| **04 学び方 (ASTRA NOVA)** | 教育思想の理解 | 本家 Astra Nova School（SpaceXで生まったAd Astra後身）の教育——第一原理の授業・成縑なし・Conundrums・Synthesis・毎年の再設計——を日本語で学べるガイド。出願方法（年間受付・3ステップ）も紹介。マスク教育の最新ニュースはMUSK RADAR APIから自動取得・自動更新。 |
 
 ## 技術構成
 

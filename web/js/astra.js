@@ -66,8 +66,13 @@
       '<div class="kicker">LINKS</div>' +
       '<p style="margin-top:6px"><a class="inline-link" href="' + ORIGIN + '" target="_blank" rel="noopener">本家サイト Astra Nova School（astranova.org）</a> — 英語・世界中から出願可能。<br>' +
       '<a class="inline-link" href="https://www.youtube.com/results?search_query=Astra+Nova+Conundrums" target="_blank" rel="noopener">Conundrums の動画をYouTubeで見る</a> — 実際のお題の雰囲気を掴むのに最適。<br>' +
+      '<a class="inline-link" href="https://musk.toriumis.com/" target="_blank" rel="noopener">MUSK RADAR</a> — マスクの発言・YouTube出演・SpaceX/Tesla/xAIの動向を日本語でリアルタイム追跡（姉妹サイト）。<br>' +
       '問い合わせ: <span class="mono">josh@astranova.org</span>（共同創設者 ジョシュ・ダーン）</p>' +
       '</div>' +
+
+      /* ---------- 教育ニュース（自動更新） ---------- */
+      '<h2 class="section">マスク教育の最新ニュース（自動更新）</h2>' +
+      '<div class="card" id="eduNews"><p class="note">最新の教育ニュースを取得中… （配信元: <a class="inline-link" href="https://musk.toriumis.com/" target="_blank" rel="noopener">MUSK RADAR</a>）</p></div>' +
 
       /* ---------- この道場での実践 ---------- */
       '<h2 class="section">日本語で、今日から始める</h2>' +
@@ -87,6 +92,32 @@
         HOS.nav(el.getAttribute('data-go'));
       });
     });
+
+    // 教育ニュースをMUSK RADAR APIから自動取得（失敗時は静かに表示を縮退）
+    (function loadEduNews() {
+      const box = root.querySelector('#eduNews');
+      if (!box) return;
+      const esc2 = function (s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      };
+      const ctrl = new AbortController();
+      const to = setTimeout(function () { ctrl.abort(); }, 12000);
+      fetch('https://musk.toriumis.com/api/news?cat=edu&limit=8', { signal: ctrl.signal })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+        .then(function (d) {
+          clearTimeout(to);
+          if (!d.items || !d.items.length) throw new Error('empty');
+          box.innerHTML =
+            '<p class="note" style="margin-bottom:8px">' + esc2(d.updatedJST || '') + ' 更新 · マスクの動向全般は姉妹サイト <a class="inline-link" href="https://musk.toriumis.com/" target="_blank" rel="noopener">MUSK RADAR</a> がリアルタイム追跡中</p>' +
+            d.items.map(function (it) {
+              return '<p style="margin:7px 0;font-size:13.5px"><span class="mono" style="font-size:10.5px;color:var(--sub)">' + esc2(it.dateJST || '') + '</span> <a class="inline-link" href="' + esc2(it.link) + '" target="_blank" rel="noopener">' + esc2(it.title) + '</a> <span class="chip">' + esc2(it.source) + '</span></p>';
+            }).join('');
+        })
+        .catch(function () {
+          clearTimeout(to);
+          box.innerHTML = '<p class="note">現在ニュースを取得できません（オフラインの可能性）。マスクの動向は <a class="inline-link" href="https://musk.toriumis.com/" target="_blank" rel="noopener">MUSK RADAR（musk.toriumis.com）</a> でリアルタイム追跡しています。</p>';
+        });
+    })();
   };
 
   function tl(year, title, desc) {
