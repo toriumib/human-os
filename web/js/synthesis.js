@@ -161,8 +161,10 @@
       hudHTML() +
       '<div class="spacer"></div>' +
       '<div class="proposal">' +
-      '<span class="agent-chip agent-' + a.agent + '">' + ag.name + '</span>' +
-      '<span class="note" style="margin-left:8px">' + esc(ag.role) + '</span>' +
+      '<div class="row" style="gap:12px;align-items:center;margin-bottom:10px">' +
+      '<span class="avatar" style="--ac:' + ({ ENG: '#244a8f', RSK: '#7a5a17', OPS: '#1f6e5a' }[a.agent] || '#333') + '">' + a.agent + '</span>' +
+      '<div><span class="agent-chip agent-' + a.agent + '">' + ag.name + '</span>' +
+      '<div class="note">' + esc(ag.role) + '</div></div></div>' +
       '<p class="p-text">「' + esc(a.text) + '」</p>' +
       '<div class="eff-chips">' + chips + '</div>' +
       '<div class="p-actions">' +

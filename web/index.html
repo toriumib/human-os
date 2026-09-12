@@ -17,7 +17,10 @@
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <button id="btnHome" class="brand" aria-label="ホーム">HUMAN<span class="brand-accent">OS</span></button>
+    <button id="btnHome" class="brand brand-mark" aria-label="ホーム">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.5 2 5 13h5l-1.5 9L19 10h-6l.5-8Z" fill="#ff3b30"/><circle cx="7.8" cy="13.6" r="1.6" fill="#37f2e6"/></svg>
+      HUMAN<span class="brand-accent">OS</span>
+    </button>
     <div class="tagline">AIに負けないための訓練所</div>
   </div>
 </header>
@@ -27,14 +30,30 @@
 <footer class="foot">
   <p>Born from a thought experiment — 第一原理でつくられた訓練所。</p>
   <p class="foot-sub">FIRST PRINCIPLES · SENSORIUM · SYNTHESIS — © 2026 toriumib</p>
+  <p class="foot-sub" style="margin-top:8px">📡 <a href="https://musk.toriumis.com/" style="color:var(--cyan)">MUSK RADAR（動向）</a> · 🎓 <a href="https://www.astranova.org/" style="color:var(--cyan)">本家 Astra Nova</a> · </> <a href="https://github.com/toriumib/human-os" style="color:var(--cyan)">GitHub</a></p>
 </footer>
 
 <nav class="tabbar" id="tabbar" aria-label="モジュール選択">
-  <button data-nav="home" class="active">道場</button>
-  <button data-nav="astranova">学び方</button>
-  <button data-nav="fp">第一原理</button>
-  <button data-nav="sensorium">Sensorium</button>
-  <button data-nav="synthesis">Synthesis</button>
+  <button data-nav="home" class="active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 21V9.5L12 3l8 6.5V21M4 21h16M9 21v-6h6v6"/></svg>
+    道場
+  </button>
+  <button data-nav="astranova">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5c-2-1.6-4.6-2-8-2v15c3.4 0 6 .4 8 2 2-1.6 4.6-2 8-2V3c-3.4 0-6 .4-8 2Zm0 0v15"/></svg>
+    学び方
+  </button>
+  <button data-nav="fp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5ZM3 13l9 5 9-5"/></svg>
+    第一原理
+  </button>
+  <button data-nav="sensorium">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12 18 6"/></svg>
+    Sensorium
+  </button>
+  <button data-nav="synthesis">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="2.5"/><circle cx="9.5" cy="13" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13" r="1" fill="currentColor" stroke="none"/><path d="M12 8V5m-4-1h8"/></svg>
+    Synthesis
+  </button>
 </nav>
 
 <script src="js/data.js"></script>

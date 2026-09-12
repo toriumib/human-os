@@ -1,5 +1,5 @@
 /* HUMAN OS service worker — offline cache */
-const CACHE = 'human-os-v4';
+const CACHE = 'human-os-v5';
 const ASSETS = [
   './',
   './index.html',

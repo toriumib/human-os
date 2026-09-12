@@ -47,17 +47,16 @@
     renderStep(root);
   }
 
-  function dotsHTML(step) {
-    // L0 常識 + L1..L5
-    let html = '';
+  function stepperHTML(step) {
+    let html = '<div class="stepper">';
     for (let i = 0; i <= 5; i++) {
       const cls = i < step ? 'done' : (i === step ? 'lit' : '');
-      const label = i === 0 ? 'L0' : 'L' + i;
-      html += '<div class="dot ' + cls + '">' + label + '</div>';
-      if (i < 5) html += '<div class="arrow">→</div>';
+      html += '<div class="s-dot ' + cls + '">' + (i === 0 ? 'L0' : 'L' + i) + '</div>';
+      if (i < 5) html += '<div class="s-line ' + (i < step ? 'done' : '') + '"></div>';
     }
-    return '<div class="depth-dots">' + html + '<span style="font-size:11px;color:var(--sub);margin-left:8px">' +
-      (step <= 5 ? FP_TOPICS && st.topic.layers[step - 1].name : '第一原理の言語化') + '</span></div>';
+    html += '</div>';
+    html += '<p class="note" style="margin:2px 0 0">現在の層：' + (step <= 5 ? st.topic.layers[step - 1].name : '第一原理の言語化（FINAL）') + '</p>';
+    return html;
   }
 
   function renderStep(root) {
@@ -68,7 +67,7 @@
     root.innerHTML =
       '<button class="back-link" id="fpBack">← お題一覧</button>' +
       '<h1 class="hero" style="font-size:20px;">' + esc(t.q) + '</h1>' +
-      dotsHTML(st.step) +
+      stepperHTML(st.step) +
       '<div class="ai-box"><div class="ai-name">AI（常識）</div>' + esc(t.common) + '</div>' +
       '<div class="spacer"></div>' +
       '<div class="card">' +
@@ -109,7 +108,7 @@
     root.innerHTML =
       '<button class="back-link" id="fpBack2">← お題一覧</button>' +
       '<h1 class="hero" style="font-size:20px;">到達点を言語化しろ</h1>' +
-      '<div class="depth-dots"><div class="dot done">L0</div><div class="arrow">→</div><div class="dot done">L1</div><div class="arrow">→</div><div class="dot done">L2</div><div class="arrow">→</div><div class="dot done">L3</div><div class="arrow">→</div><div class="dot done">L4</div><div class="arrow">→</div><div class="dot done">L5</div><div class="arrow">→</div><div class="dot lit">FP</div></div>' +
+      stepperHTML(6) +
       '<div class="card">' + summary + '</div>' +
       '<div class="spacer"></div>' +
       '<div class="card">' +
@@ -169,9 +168,15 @@
     root.innerHTML =
       '<h1 class="hero" style="font-size:20px;">採点結果</h1>' +
       '<div class="card">' +
-      '<div class="meter"><div class="meter-head"><span>第一原理到達度</span><span class="mono">' + r.score + ' / 100</span></div>' +
-      '<div class="meter-bar"><div class="meter-fill m-fill-score" style="width:' + r.score + '%"></div></div></div>' +
-      '<div style="margin:12px 0"><span class="badge">' + r.badge + '</span></div>' +
+      '<div class="ring-wrap">' +
+      '<svg viewBox="0 0 120 120">' +
+      '<defs><linearGradient id="hosRingGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3b30"/><stop offset=".5" stop-color="#ffb020"/><stop offset="1" stop-color="#2fd06a"/></linearGradient></defs>' +
+      '<circle class="ring-bg" cx="60" cy="60" r="52"/>' +
+      '<circle class="ring-prog" id="fpRing" cx="60" cy="60" r="52"/>' +
+      '</svg>' +
+      '<div class="ring-num">' + r.score + '</div></div>' +
+      '<p class="note" style="text-align:center;margin-bottom:10px">第一原理到達度 / 100</p>' +
+      '<div style="margin:0 0 12px;text-align:center"><span class="badge">' + r.badge + '</span></div>' +
       '<p class="note">思考の最深層：' + (r.layerReached ? 'L' + r.layerReached + ' ' + t.layers[r.layerReached - 1].name : 'L0 常識のまま') + '</p>' +
       '<div class="result-keys"><p class="note" style="margin-bottom:4px">君の思考に現れた「物理レベルの言葉」：</p>' + keyChips + '</div>' +
       '</div>' +
@@ -185,6 +190,16 @@
 
     root.querySelector('#fpRetry').addEventListener('click', function () { startSession(root, t); });
     root.querySelector('#fpList').addEventListener('click', function () { FP.render(root); });
+
+    // 採点リングのアニメーション（二段階rAFでtransitionを発火させる）
+    const ringEl = root.querySelector('#fpRing');
+    if (ringEl) {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          ringEl.style.strokeDashoffset = String(327 - 327 * r.score / 100);
+        });
+      });
+    }
   }
 
   window.FP = FP;
