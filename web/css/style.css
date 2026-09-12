@@ -39,11 +39,11 @@ button { font-family: inherit; color: inherit; background: none; border: none; c
 /* ---- tabbar ---- */
 .tabbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(5, 1fr);
   background: #0d1017; border-top: 1px solid var(--line);
   padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
 }
-.tabbar button { padding: 10px 4px; font-size: 12px; color: var(--sub); font-weight: 700; letter-spacing: .5px; }
+.tabbar button { padding: 10px 2px; font-size: 11px; color: var(--sub); font-weight: 700; letter-spacing: 0; }
 .tabbar button.active { color: var(--accent); }
 .tabbar button.active::after { content: ""; display: block; width: 22px; height: 2px; background: var(--accent); margin: 3px auto 0; }
 
@@ -132,6 +132,44 @@ textarea.ta:focus { outline: none; border-color: var(--cyan); }
 .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
 .stat .v { font-family: var(--mono); font-size: 22px; font-weight: 800; color: var(--cyan); }
 .stat .k { font-size: 11px; color: var(--sub); letter-spacing: 1px; }
+
+/* ---------- 本家バナー / 学び方 ---------- */
+.honke {
+  display: block; text-decoration: none; margin-bottom: 18px;
+  background: linear-gradient(135deg, #101820 0%, #14202a 60%, #122228 100%);
+  border: 1px solid #1a5f5a; border-radius: 14px; padding: 16px 18px;
+  transition: border-color .12s ease, transform .12s ease;
+}
+.honke:hover { border-color: var(--cyan); transform: translateY(-1px); }
+.honke-k { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; color: var(--cyan); }
+.honke-t { font-size: 16px; font-weight: 800; color: var(--text); margin: 5px 0 4px; }
+.honke-d { font-size: 12px; color: var(--sub); }
+
+.timeline { border-left: 2px solid var(--line); margin: 6px 0 6px 10px; padding-left: 20px; }
+.tl-item { position: relative; margin-bottom: 18px; }
+.tl-item::before {
+  content: ""; position: absolute; left: -26px; top: 7px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,59,48,.15);
+}
+.tl-year { font-family: var(--mono); color: var(--cyan); font-size: 13px; font-weight: 800; }
+.tl-title { font-weight: 800; font-size: 14px; margin: 2px 0; }
+.tl-item p { color: var(--sub); font-size: 13px; }
+
+details.principle { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+details.principle[open] { border-color: #1a5f5a; }
+details.principle summary { cursor: pointer; font-weight: 800; font-size: 15px; list-style: none; display: flex; gap: 10px; align-items: baseline; }
+details.principle summary::-webkit-details-marker { display: none; }
+details.principle summary::after { content: "＋"; margin-left: auto; color: var(--sub); font-weight: 400; }
+details.principle[open] summary::after { content: "−"; }
+details.principle summary .num { font-family: var(--mono); color: var(--accent); }
+details.principle .body { margin-top: 10px; font-size: 13.5px; color: #c7cfdd; line-height: 1.9; }
+
+.quote { background: #141019; border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; padding: 14px 16px; margin: 10px 0; font-size: 14px; }
+.quote .en { display: block; font-size: 11px; color: var(--sub); font-family: var(--mono); margin-top: 8px; line-height: 1.6; }
+
+a.inline-link { color: var(--cyan); text-decoration: underline; }
+a.inline-link:hover { color: #7ff7ee; }
 
 /* ---------- SENSORIUM ---------- */
 .sensor-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }

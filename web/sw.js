@@ -1,11 +1,12 @@
 /* HUMAN OS service worker — offline cache */
-const CACHE = 'human-os-v1';
+const CACHE = 'human-os-v2';
 const ASSETS = [
   './',
   './index.html',
   './css/style.css',
   './js/data.js',
   './js/app.js',
+  './js/astra.js',
   './js/fp.js',
   './js/sensorium.js',
   './js/synthesis.js',

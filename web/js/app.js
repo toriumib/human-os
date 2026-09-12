@@ -8,6 +8,7 @@
 
   const views = {
     home: renderHome,
+    astranova: function (root) { window.AN.render(root); },
     fp: function (root) { window.FP.render(root); },
     sensorium: function (root) { window.SENS.render(root); },
     synthesis: function (root) { window.SYN.render(root); }
@@ -50,6 +51,11 @@
     const synBest = HOS.getJSON('hos_syn_best', { rank: '-', score: 0 });
 
     root.innerHTML =
+      '<a class="honke" href="https://www.astranova.org/" target="_blank" rel="noopener">' +
+      '<div class="honke-k">本家 ORIGIN SCHOOL</div>' +
+      '<div class="honke-t">Astra Nova School — SpaceXのロケット工場で生まれた学校</div>' +
+      '<div class="honke-d">この道場の思想の源流。2014年にイーロン・マスクがわが子のためにSpaceX構内に作った学校「Ad Astra」が、世界中の11〜18歳が学ぶオンライン学校になった。出願は年間受付中（サイト右上 Apply Now から）→</div>' +
+      '</a>' +
       '<h1 class="hero">AIが「常識」の答えを出す時代に、<br>人間に残るのは<span style="color:var(--accent)">前提を疑う力</span>だ。</h1>' +
       '<p class="lead">HUMAN OS は、AIに思考を奪われないための3つの訓練を束ねた道場である。既存の学習アプリが「答えを覚えさせる」のに対し、ここでは「前提を破壊する」「物理世界を掴む」「AIを制御する」を鍛える。</p>' +
 
@@ -68,6 +74,8 @@
         'スマホの全センサーを解放し、見えない物理量を可視化せよ。そしてAIが生成した「美しすぎる嘘」と、ノイズだらけの「物理的真実」を見抜く訓練。') +
       moduleCard('03 / SYNTHESIS', 'AIの暴走を制御する指揮官',
         '君はCEOだ。エンジニアAI・リスクAI・運用AIに指示を出し、文明的課題を遂行せよ。AIは「最適解」のために平然と人間を差し引いてくる。') +
+      moduleCard('04 / ASTRA NOVA 学び方', '本家の教育を日本語で学ぶ',
+        'マスクがSpaceXに作った学校Ad Astra→Astra Nova。第一原理の授業、成縑なし、Conundrums、Synthesis——その教育思想の核心を日本語で。') +
       '</div>' +
 
       '<div class="spacer"></div>' +
@@ -97,6 +105,7 @@
     if (kick.indexOf('FIRST PRINCIPLES') >= 0) nav('fp');
     else if (kick.indexOf('SENSORIUM') >= 0) nav('sensorium');
     else if (kick.indexOf('SYNTHESIS') >= 0) nav('synthesis');
+    else if (kick.indexOf('ASTRA NOVA') >= 0) nav('astranova');
   });
 
   /* ---------- PWA: service worker (https only) ---------- */
