@@ -18,12 +18,15 @@
   function renderTopicList(root) {
     const hist = HOS.getJSON('hos_fp_history', []);
     const cards = FP_TOPICS.map(function (t, i) {
-      const done = hist.filter(function (h) { return h.id === t.id; }).length;
+      const mine = hist.filter(function (h) { return h.id === t.id; });
+      const done = mine.length;
+      const best = mine.reduce(function (m, r) { return Math.max(m, r.score); }, 0);
       return '<div class="card clickable" data-i="' + i + '">' +
-        '<div class="kicker">CONUNDRUM ' + String(i + 1).padStart(2, '0') + (done ? ' · 訓練' + done + '回' : '') + '</div>' +
+        '<div class="kicker">CONUNDRUM ' + String(i + 1).padStart(2, '0') +
+        (done ? ' · <span style="color:var(--ok)">最高' + best + '点</span>' : '') + '</div>' +
         '<h3>' + esc(t.q) + '</h3>' +
         '<p>' + esc(t.common.slice(0, 42)) + '…</p>' +
-        '<span class="go">この常識を破壊する →</span></div>';
+        '<span class="go">' + (done ? '再訓練する →' : 'この常識を破壊する →') + '</span></div>';
     }).join('');
 
     root.innerHTML =

@@ -71,7 +71,9 @@
       '</div>' +
 
       /* ---------- 教育ニュース（自動更新） ---------- */
-      '<h2 class="section">マスク教育の最新ニュース（自動更新）</h2>' +
+      '<div class="row" style="justify-content:space-between;align-items:center;margin-top:26px">' +
+      '<h2 class="section" style="margin:0">マスク教育の最新ニュース（自動更新）</h2>' +
+      '<button class="btn small ghost" id="eduRefresh">↻ 更新</button></div>' +
       '<div class="card" id="eduNews"><p class="note">最新の教育ニュースを取得中… （配信元: <a class="inline-link" href="https://musk.toriumis.com/" target="_blank" rel="noopener">MUSK RADAR</a>）</p></div>' +
 
       /* ---------- この道場での実践 ---------- */
@@ -94,12 +96,17 @@
     });
 
     // 教育ニュースをMUSK RADAR APIから自動取得（失敗時は静かに表示を縮退）
-    (function loadEduNews() {
-      const box = root.querySelector('#eduNews');
-      if (!box) return;
-      const esc2 = function (s) {
-        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-      };
+    const box = root.querySelector('#eduNews');
+    const esc2 = function (s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    };
+    const relTime = function (ts) {
+      const s = Math.floor((Date.now() - ts) / 1000);
+      if (s < 3600) return Math.max(1, Math.floor(s / 60)) + '分前';
+      if (s < 86400) return Math.floor(s / 3600) + '時間前';
+      return Math.floor(s / 86400) + '日前';
+    };
+    function loadEduNews() {
       const ctrl = new AbortController();
       const to = setTimeout(function () { ctrl.abort(); }, 12000);
       fetch('https://musk.toriumis.com/api/news?cat=edu&limit=8', { signal: ctrl.signal })
@@ -108,16 +115,24 @@
           clearTimeout(to);
           if (!d.items || !d.items.length) throw new Error('empty');
           box.innerHTML =
-            '<p class="note" style="margin-bottom:8px">' + esc2(d.updatedJST || '') + ' 更新 · マスクの動向全般は姉妹サイト <a class="inline-link" href="https://musk.toriumis.com/" target="_blank" rel="noopener">MUSK RADAR</a> がリアルタイム追跡中</p>' +
+            '<p class="note" style="margin-bottom:8px"><span class="mono" style="color:var(--ok)">● LIVE</span> ' + esc2(d.updatedJST || '') + ' 更新 · マスクの動向全般は姉妹サイト <a class="inline-link" href="https://musk.toriumis.com/" target="_blank" rel="noopener">MUSK RADAR</a> がリアルタイム追跡中</p>' +
             d.items.map(function (it) {
-              return '<p style="margin:7px 0;font-size:13.5px"><span class="mono" style="font-size:10.5px;color:var(--sub)">' + esc2(it.dateJST || '') + '</span> <a class="inline-link" href="' + esc2(it.link) + '" target="_blank" rel="noopener">' + esc2(it.title) + '</a> <span class="chip">' + esc2(it.source) + '</span></p>';
+              return '<p style="margin:8px 0;font-size:13.5px"><span class="mono" style="font-size:10.5px;color:var(--sub)">' + relTime(it.date) + '</span> <a class="inline-link" href="' + esc2(it.link) + '" target="_blank" rel="noopener">' + esc2(it.title) + '</a> <span class="chip">' + esc2(it.source) + '</span></p>';
             }).join('');
         })
         .catch(function () {
           clearTimeout(to);
           box.innerHTML = '<p class="note">現在ニュースを取得できません（オフラインの可能性）。マスクの動向は <a class="inline-link" href="https://musk.toriumis.com/" target="_blank" rel="noopener">MUSK RADAR（musk.toriumis.com）</a> でリアルタイム追跡しています。</p>';
         });
-    })();
+    }
+    if (box) {
+      loadEduNews();
+      const refreshBtn = root.querySelector('#eduRefresh');
+      if (refreshBtn) refreshBtn.addEventListener('click', function () {
+        box.innerHTML = '<p class="note">更新中…</p>';
+        loadEduNews();
+      });
+    }
   };
 
   function tl(year, title, desc) {
